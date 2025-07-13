@@ -1,5 +1,15 @@
 # ETF Open Analytics
 
+ETF Open Analytics is an open-source project for scraping and analyzing historical ETF (Exchange-Traded Funds) data.
+
+It uses:
+- **Python** for data collection  
+- **PostgreSQL** for structured data storage  
+- **GitHub Actions** to schedule and automate daily updates  
+
+This is a **proof-of-concept project**: the dataset currently includes only a subset of ETFs and partial historical data.  
+However, the architecture is designed to be extensible, and it can be expanded to include more complete data and support deeper, more accurate portfolio analysis, backtesting, and machine learning applications.
+
 ## ETF Scraper
 
 The `etf_scraper` module is responsible for downloading and storing historical ETF price data.
