@@ -27,18 +27,18 @@ pip install -r etf_scraper/requirements.txt
 python etf_scraper/main.py
 
 Make sure to create a .env file with the following variables:
-`
+```
 DATABASE_URL=postgresql://<user>:<password>@<host>/<db>
 TICKER_FIELD=yahoo_symbol
-`
+```
 
 ### GitHub Action
 The workflow .github/workflows/fetch.yml runs the scraper daily using:
-`
+```
 on:
   schedule:
     - cron: '0 6 * * *'  # Every day at 6:00 UTC
-`
+```
 
 To use it:
 - Add `DATABASE_URL` as a GitHub secret
