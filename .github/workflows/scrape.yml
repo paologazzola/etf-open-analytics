@@ -1,0 +1,34 @@
+name: Run ETF Scraper
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Runs every day at 06:00 UTC
+  workflow_dispatch:     # Allows manual triggering
+
+jobs:
+  run-scraper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install --upgrade pip
+          pip install -r etf_scraper/requirements.txt
+
+      - name: Run ETF scraper
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          TICKER_FIELD: ${{ vars.TICKER_FIELD }}
+        run: |
+          source .venv/bin/activate
+          python etf_scraper/main.py
