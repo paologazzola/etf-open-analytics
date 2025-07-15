@@ -28,8 +28,8 @@ def update_all_prices():
             # Otherwise, start from the day after the last saved date
             from_date = datetime.combine(last_date + timedelta(days=1), datetime.min.time())
 
-        # For now, fetch data only for that day
-        to_date = from_date
+        # fetch data until today
+        to_date = datetime.now()
 
         print(f"Fetching {symbol_value} from {from_date.date()} to {to_date.date()}...")
 
