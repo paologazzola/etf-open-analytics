@@ -1,6 +1,7 @@
 import yfinance as yf
 import pandas as pd
 from datetime import datetime
+import numpy as np
 
 def fetch_etf_prices(yahoo_symbol: str, from_date: datetime, to_date: datetime) -> list[dict]:
     try:
@@ -15,22 +16,29 @@ def fetch_etf_prices(yahoo_symbol: str, from_date: datetime, to_date: datetime) 
             print(f"No data found for {yahoo_symbol}")
             return []
 
-        # If the DataFrame uses a MultiIndex (e.g., columns like ("Close", "VOO")), flatten it
+        # Fix multi-index if needed
         if isinstance(df.columns, pd.MultiIndex):
             df = df.swaplevel(axis=1)[yahoo_symbol]
 
+        # Calculate log returns
+        df['log_return'] = np.log(df['Close'] / df['Close'].shift(1))
+
         prices = []
         for date, row in df.iterrows():
+            # Skip first row (NaN log return)
+            if pd.isna(row["log_return"]):
+                continue
             prices.append({
                 "date": date.date(),
                 "open": float(row["Open"]),
                 "high": float(row["High"]),
                 "low": float(row["Low"]),
                 "close": float(row["Close"]),
-                "volume": int(row["Volume"])
+                "volume": int(row["Volume"]),
+                "log_return": float(row["log_return"])
             })
         return prices
 
     except Exception as e:
-        print(f"Error while fetching data for {yahoo_symbol}: {e}")
+        print(f"Error fetching data for {yahoo_symbol}: {e}")
         return []

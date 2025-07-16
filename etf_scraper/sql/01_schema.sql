@@ -21,5 +21,6 @@ CREATE TABLE etf_price (
     low NUMERIC,
     close NUMERIC,
     volume BIGINT,
+    log_return NUMERIC
     UNIQUE(etf_id, date)
 );

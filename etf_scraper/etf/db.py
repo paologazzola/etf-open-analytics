@@ -20,12 +20,12 @@ def get_etfs_to_update(field_name: str = "yahoo_symbol"):
         return result.fetchall()
 
 def insert_etf_prices(etf_id: int, prices: list[dict]):
-    """Inserisce i prezzi nella tabella etf_price."""
+    """Insert daily prices into the etf_price table, including log returns."""
     with engine.begin() as conn:
         for p in prices:
             conn.execute(text("""
-                INSERT INTO etf_price (etf_id, date, open, high, low, close, volume)
-                VALUES (:etf_id, :date, :open, :high, :low, :close, :volume)
+                INSERT INTO etf_price (etf_id, date, open, high, low, close, volume, log_return)
+                VALUES (:etf_id, :date, :open, :high, :low, :close, :volume, :log_return)
                 ON CONFLICT (etf_id, date) DO NOTHING
             """), {
                 "etf_id": etf_id,
@@ -34,8 +34,10 @@ def insert_etf_prices(etf_id: int, prices: list[dict]):
                 "high": p["high"],
                 "low": p["low"],
                 "close": p["close"],
-                "volume": p.get("volume", 0)
+                "volume": p.get("volume", 0),
+                "log_return": p.get("log_return")  # can be None if not provided
             })
+
 
 def update_last_price_date(etf_id: int, last_date):
     with engine.begin() as conn:
