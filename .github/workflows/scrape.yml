@@ -2,7 +2,7 @@ name: Run ETF Scraper
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # Runs every day at 06:00 UTC
+    - cron: '0 15 * * *'  # Runs every day at 15:00 UTC
   workflow_dispatch:     # Allows manual triggering
 
 jobs:
