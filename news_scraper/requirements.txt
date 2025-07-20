@@ -1,0 +1,17 @@
+python-dotenv
+requests
+sqlalchemy
+psycopg2-binary
+python-dateutil
+newsapi-python
+
+transformers==4.41.2
+torch==2.3.0  # or the appropriate version for your system
+spacy
+
+# Need to install the spaCy model separately
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1.tar.gz
+
+# Commands to tun to install dependencies:
+# pip install -r requirements.txt
+# python -m spacy download en_core_web_sm
