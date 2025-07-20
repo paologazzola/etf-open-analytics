@@ -47,9 +47,3 @@ python main.py
 - Requires Python 3.8+.
 - Make sure to install the spaCy model as described above.
 - The FinBERT and NER models are downloaded automatically on first run.
-
-## License
-
-MIT License.
-```
-   python -m spacy download en_core_web_sm
