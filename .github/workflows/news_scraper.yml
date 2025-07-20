@@ -11,7 +11,7 @@ jobs:
 
     env:
       NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
-      NEWSAPI_URL: ${{ vars.NEWSAPI_URL }}
+      NEWSAPI_URL: ${{ vars.NEWSAPI_ENDPOINT }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
