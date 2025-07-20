@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      NEWSAPI_KEY: ${{ vars.NEWSAPI_KEY }}
-      NEWSAPI_URL: ${{ secrets.NEWSAPI_KEY }}
+      NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
+      NEWSAPI_URL: ${{ vars.NEWSAPI_URL }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
