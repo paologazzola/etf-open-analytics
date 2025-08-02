@@ -1,5 +1,13 @@
 # ETF Open Analytics
 
+## Table of Contents
+
+- [ETF Scraper](#etf-scraper)
+- [ETF Predictor](#etf-predictor)
+- [Portfolio Evaluator](#portfolio-evaluator)
+- [License](#license)
+- [Disclaimer on Data Usage](#disclaimer-on-data-usage)
+
 ETF Open Analytics is an open-source project for scraping and analyzing historical ETF (Exchange-Traded Funds) data.
 
 It uses:
@@ -54,6 +62,62 @@ on:
 To use it:
 - Add `DATABASE_URL` as a GitHub secret
 - Add `TICKER_FIELD` as a GitHub environment variable
+
+## ETF Scraper
+
+The `etf_scraper` module is responsible for downloading and storing historical ETF price data.
+
+## ETF Predictor
+
+The `etf_predictor` module provides tools for forecasting future ETF prices and trends using historical data.
+
+### Features
+
+- Applies machine learning models to predict future ETF prices
+- Supports backtesting with historical data
+- Allows evaluation of prediction accuracy
+- Designed for extensibility with custom models and strategies
+
+### Usage
+
+```bash
+# Install dependencies
+pip install -r etf_predictor/requirements.txt
+
+# Run a prediction example
+python etf_predictor/main.py
+```
+
+Make sure to create a `.env` file with any required variables for your portfolio evaluation module.
+
+## Portfolio Evaluator
+
+The `portfolio_evaluator` module provides advanced tools for analyzing, simulating, and optimizing ETF portfolios using historical data and machine learning techniques.
+
+### Features
+
+- Calculates key portfolio metrics such as returns, volatility, Sharpe ratio, and maximum drawdown
+- Simulates portfolio performance over time using historical ETF prices
+- Supports scenario analysis and stress testing to evaluate portfolio robustness
+- Applies machine learning models to optimize portfolio allocation based on risk and return objectives
+- Performs feature selection and dimensionality reduction to identify the most relevant ETFs for a given strategy
+- Enables backtesting of portfolio strategies and evaluation of their predictive performance
+- Designed for extensibility with custom evaluation metrics and optimization algorithms
+
+### Usage
+
+```bash
+# Install dependencies
+pip install -r portfolio_evaluator/requirements.txt
+
+# Run a portfolio evaluation example
+python portfolio_evaluator/main.py
+
+# Update or retrain the portfolio evaluation model (run once)
+python portfolio_evaluator/run_once.py
+```
+
+Make sure to create a `.env` file with any required variables for the portfolio
 
 ## License
 This project is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/).

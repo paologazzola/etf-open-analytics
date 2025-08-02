@@ -149,3 +149,29 @@ INSERT INTO etf (
   'equity',
   NULL
 );
+
+-- 9 SPDR S&P U.S. Energy Select Sector UCITS ETF
+INSERT INTO etf (
+    name,
+    isin,
+    description,
+    distribution_policy,
+    region,
+    replication_method,
+    issuer,
+    yahoo_symbol,
+    asset_class,
+    last_price_date
+) VALUES (
+    'SXLE.MI',
+    'IE00BWBXM492',
+    'SPDR S&P U.S. Energy Select Sector UCITS ETF',
+    'accumulating',
+    'developed',
+    'physical',
+    'spdr',
+    'SXLEMI',
+    'equity',
+    NULL
+);
+
