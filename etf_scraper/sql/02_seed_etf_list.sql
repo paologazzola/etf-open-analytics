@@ -27,7 +27,7 @@ INSERT INTO etf (
     'developed',
     'physical',
     'ishares',
-    'ISAC.L',
+    'SSAC.L',
     'equity',
     NULL
 );
@@ -44,7 +44,7 @@ INSERT INTO etf (
     'emerging',
     'physical',
     'ishares',
-    'ISAC.L',
+    'IEMA.L',
     'equity',
     NULL
 );
