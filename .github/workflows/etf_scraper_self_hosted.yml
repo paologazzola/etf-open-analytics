@@ -1,0 +1,36 @@
+name: Run Self Hosted ETF Scraper
+
+on:
+  schedule:
+    - cron: '0 15 * * *'  # Runs every day at 15:00 UTC
+  workflow_dispatch:     # Allows manual triggering
+
+jobs:
+  run-scraper:
+    # use the self hosted Runner Scale Set installed via Helm
+    runs-on: etf-arc
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install -r etf_scraper/requirements.txt
+
+      - name: Run ETF scraper
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          TICKER_FIELD: ${{ vars.TICKER_FIELD }}
+        run: |
+          source .venv/bin/activate
+          python etf_scraper/main.py

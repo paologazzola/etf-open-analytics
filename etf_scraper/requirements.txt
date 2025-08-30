@@ -1,7 +1,6 @@
-# Librerie principali
-psycopg2-binary       # per collegarsi a PostgreSQL
-sqlalchemy            # ORM per DB
-python-dotenv         # per caricare le variabili da .env
-investpy              # per fetch dati ETF da Investing.com
-pandas                # per manipolare i dati
-yfinance              # fetch etf price 
+psycopg2-binary
+sqlalchemy
+python-dotenv
+investpy
+pandas
+yfinance
