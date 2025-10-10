@@ -57,5 +57,6 @@ def evaluate_portfolio(portfolio):
 
     return {
         "overall_risk": overall_risk,
+        "weighted_score": weighted_score,
         "etf_details": risk_results
     }

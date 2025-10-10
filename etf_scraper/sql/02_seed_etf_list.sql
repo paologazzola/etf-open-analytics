@@ -76,8 +76,16 @@ INSERT INTO etf (
 
 -- 5. Vanguard EUR Eurozone Government Bond UCITS ETF EUR Accumulating
 INSERT INTO etf (
-    name, isin, description, distribution_policy, region,
-    replication_method, issuer, yahoo_symbol, asset_class, last_price_date
+  name,
+  isin,
+  description,
+  distribution_policy,
+  region,
+  replication_method,
+  issuer,
+  yahoo_symbol,
+  asset_class,
+  last_price_date
 ) VALUES (
     'VGEA',
     'IE00BH04GL39',
@@ -93,8 +101,16 @@ INSERT INTO etf (
 
 -- 6. Vanguard EUR Corporate Bond UCITS ETF EUR Accumulating
 INSERT INTO etf (
-    name, isin, description, distribution_policy, region,
-    replication_method, issuer, yahoo_symbol, asset_class, last_price_date
+  name,
+  isin,
+  description,
+  distribution_policy,
+  region,
+  replication_method,
+  issuer,
+  yahoo_symbol,
+  asset_class,
+  last_price_date
 ) VALUES (
     'VECA',
     'IE00BZ163L38',
@@ -110,8 +126,16 @@ INSERT INTO etf (
 
 -- 7. iShares Global Aggregate Bond ESG SRI UCITS ETF EUR Hedged Accumulation
 INSERT INTO etf (
-    name, isin, description, distribution_policy, region,
-    replication_method, issuer, yahoo_symbol, asset_class, last_price_date
+  name,
+  isin,
+  description,
+  distribution_policy,
+  region,
+  replication_method,
+  issuer,
+  yahoo_symbol,
+  asset_class,
+  last_price_date
 ) VALUES (
     'AEGE',
     'IE00BDBRDM35',
@@ -172,6 +196,31 @@ INSERT INTO etf (
     'spdr',
     'SXLE.L',
     'equity',
+    NULL
+);
+
+-- 21Shares Polygon ETP (POLY.SW)
+INSERT INTO etf (
+    name,
+    isin,
+    description,
+    distribution_policy,
+    region,
+    replication_method,
+    issuer,
+    yahoo_symbol,
+    asset_class,
+    last_price_date
+) VALUES (
+    'POLY.SW',
+    'CH1129538448',
+    '21Shares Polygon ETP',
+    'accumulating',
+    'all_world',
+    'physical',
+    '21Shares',
+    'POLY.SW',
+    'cryptocurrency',
     NULL
 );
 

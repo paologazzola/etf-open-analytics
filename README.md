@@ -80,8 +80,8 @@ The `etf_predictor` module provides tools for forecasting future ETF prices and 
 # Install dependencies
 pip install -r etf_predictor/requirements.txt
 
-# Run a prediction example
-python etf_predictor/main.py
+# Run predictor webapp
+uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
 Make sure to create a `.env` file with any required variables for your portfolio evaluation module.
@@ -106,8 +106,8 @@ The `portfolio_evaluator` module provides advanced tools for analyzing, simulati
 # Install dependencies
 pip install -r portfolio_evaluator/requirements.txt
 
-# Run a portfolio evaluation example
-python portfolio_evaluator/main.py
+# Run portofolio_evaluator webapp
+uvicorn main:app --host 0.0.0.0 --port 8000
 
 # Update or retrain the portfolio evaluation model (run once)
 python portfolio_evaluator/run_once.py

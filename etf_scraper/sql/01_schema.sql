@@ -8,7 +8,7 @@ CREATE TABLE etf (
     replication_method TEXT CHECK (replication_method IN ('physical', 'synthetic')),
     issuer TEXT NOT NULL,
     yahoo_symbol TEXT UNIQUE NOT NULL,
-    asset_class TEXT CHECK (asset_class IN ('equity', 'bond')) NOT NULL,
+    asset_class TEXT CHECK (asset_class IN ('equity', 'bond', 'cryptocurrency')) NOT NULL,
     last_price_date DATE
 );
 
