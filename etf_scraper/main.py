@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
-from etf.db import get_etfs_to_update, insert_etf_prices, update_last_price_date
-from etf.fetch import fetch_etf_prices
+from modules.db import get_etfs_to_update, insert_etf_prices, update_last_price_date
+from modules.fetch import fetch_etf_prices
 
 # Load environment variables from .env file
 load_dotenv()

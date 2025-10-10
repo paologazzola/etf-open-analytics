@@ -163,14 +163,14 @@ INSERT INTO etf (
     asset_class,
     last_price_date
 ) VALUES (
-    'SXLE.MI',
+    'SXLE.L',
     'IE00BWBXM492',
     'SPDR S&P U.S. Energy Select Sector UCITS ETF',
     'accumulating',
     'developed',
     'physical',
     'spdr',
-    'SXLEMI',
+    'SXLE.L',
     'equity',
     NULL
 );

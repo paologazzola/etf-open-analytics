@@ -63,10 +63,6 @@ To use it:
 - Add `DATABASE_URL` as a GitHub secret
 - Add `TICKER_FIELD` as a GitHub environment variable
 
-## ETF Scraper
-
-The `etf_scraper` module is responsible for downloading and storing historical ETF price data.
-
 ## ETF Predictor
 
 The `etf_predictor` module provides tools for forecasting future ETF prices and trends using historical data.

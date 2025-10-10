@@ -2,12 +2,12 @@ from fastapi import HTTPException
 import numpy as np
 import traceback
 
-from app.db import (
+from modules.db import (
     get_etf_id_by_isin,
     get_etf_prices_with_log_return,
     EtfNotFoundError
 )
-from app.model import predict_next_log_return
+from modules.model import predict_next_log_return
 
 def get_prediction_data(isin: str, days: int) -> dict:
     """

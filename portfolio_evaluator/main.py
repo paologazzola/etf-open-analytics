@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from typing import List
-from app.portfolio_risk_evaluator import evaluate_portfolio
+from modules.portfolio_risk_evaluator import evaluate_portfolio
 
 app = FastAPI()
 

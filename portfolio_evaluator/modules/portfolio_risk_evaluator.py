@@ -3,7 +3,7 @@ import joblib
 import numpy as np
 import pandas as pd
 from dotenv import load_dotenv
-from app.db import get_etf_details_with_log_returns
+from modules.db import get_etf_details_with_log_returns
 
 load_dotenv()
 MODEL_PATH = os.getenv("MODEL_PATH", "models/risk_model.pkl")

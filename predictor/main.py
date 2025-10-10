@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from fastapi import FastAPI, Query
-from app.service import get_prediction_data
+from modules.service import get_prediction_data
 from fastapi.responses import JSONResponse
 
 # Load environment variables from .env file

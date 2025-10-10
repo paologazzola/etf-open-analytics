@@ -7,7 +7,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.ensemble import RandomForestClassifier
-from app.db import load_training_data
+from modules.db import load_training_data
 
 load_dotenv()
 MODEL_PATH = os.getenv("MODEL_PATH", "models/risk_model.pkl")

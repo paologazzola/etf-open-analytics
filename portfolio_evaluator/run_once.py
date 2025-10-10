@@ -2,9 +2,9 @@ import sys
 import os
 
 # Ensure app is in the path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "app"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "modules"))
 
-from app.train_model import train_and_save_model
+from modules.train_model import train_and_save_model
 
 if __name__ == "__main__":
     print("[INFO] Starting one-time model training...")
