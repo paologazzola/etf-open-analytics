@@ -1,0 +1,20 @@
+image:
+  repository: ghcr.io/<your-namespace>/etf-open-analytics-chatbot
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 8080
+
+env:
+  LLM_BACKEND: "ollama"
+  LLM_MODEL: "phi3:mini"
+  LLM_URL: "http://ollama:11434"
+  PORTFOLIO_EVAL_URL: "http://portfolio-evaluator.full-kc.svc.cluster.local:8000"
+  PORTFOLIO_EVAL_PATH: "/evaluate"
+
+# If you run Ollama in-cluster:
+ollama:
+  enabled: true
+  image: ollama/ollama:latest
+  servicePort: 11434
