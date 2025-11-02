@@ -122,3 +122,6 @@ ENV/
 env/
 env.bak/
 venv.bak/
+
+# chroma db
+chroma/
