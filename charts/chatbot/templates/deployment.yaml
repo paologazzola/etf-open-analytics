@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: chatbot }
+  template:
+    metadata:
+      labels: { app: chatbot }
+    spec:
+      containers:
+        - name: chatbot
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports: [{ containerPort: {{ .Values.service.port }} }]
+          env:
+            - name: LLM_BACKEND
+              value: "{{ .Values.env.LLM_BACKEND }}"
+            - name: LLM_MODEL
+              value: "{{ .Values.env.LLM_MODEL }}"
+            - name: LLM_URL
+              value: "{{ .Values.env.LLM_URL }}"
+            - name: PORTFOLIO_EVAL_URL
+              value: "{{ .Values.env.PORTFOLIO_EVAL_URL }}"
+            - name: PORTFOLIO_EVAL_PATH
+              value: "{{ .Values.env.PORTFOLIO_EVAL_PATH }}"
+        {{- if .Values.ollama.enabled }}
+        - name: ollama
+          image: {{ .Values.ollama.image | quote }}
+          args: ["serve"]
+          ports: [{ containerPort: {{ .Values.ollama.servicePort }} }]
+        {{- end }}
