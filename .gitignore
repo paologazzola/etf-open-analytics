@@ -124,4 +124,4 @@ env.bak/
 venv.bak/
 
 # chroma db
-chroma/
+.chroma/

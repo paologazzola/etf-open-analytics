@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import List, Dict, Iterable
 from .embed_store import index_docs
 
-SUPPORTED_EXT = (".md", ".txt")
+SUPPORTED_EXT = (".md", ".txt", ".pdf")
 
 
 def _rel(doc: Path, root: Path) -> str:
@@ -19,21 +19,33 @@ def _rel(doc: Path, root: Path) -> str:
 
 
 def load_text_files(base_dir: Path) -> List[Dict]:
-    """Load Markdown and text files recursively from base_dir.
+    """Load Markdown, text, and PDF files recursively from base_dir.
 
     Returns list of {"id": str, "text": str, "meta": {"path": str}}.
-    The "id" here is the *path*; chunk index will be appended later.
     """
     items: List[Dict] = []
     for path in base_dir.rglob("*"):
-        if path.is_file() and path.suffix.lower() in SUPPORTED_EXT:
-            try:
+        if not path.is_file() or path.suffix.lower() not in SUPPORTED_EXT:
+            continue
+
+        rel = _rel(path, base_dir)
+        try:
+            if path.suffix.lower() == ".pdf":
+                reader = PdfReader(str(path))
+                text = "\n".join([page.extract_text() or "" for page in reader.pages])
+            else:
                 text = path.read_text(encoding="utf-8", errors="ignore")
-            except Exception:
-                continue
-            rel = _rel(path, base_dir)
-            items.append({"id": rel, "text": text, "meta": {"path": rel}})
+        except Exception as e:
+            print(f"[WARN] Skipping {path}: {e}")
+            continue
+
+        if not text.strip():
+            continue
+
+        items.append({"id": rel, "text": text, "meta": {"path": rel}})
+
     return items
+
 
 
 def chunk(text: str, size: int = 1600, overlap: int = 200) -> Iterable[str]:

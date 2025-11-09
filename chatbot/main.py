@@ -1,44 +1,62 @@
-"""FastAPI app entrypoint.
-
-POST /chat {"message": "..."}
-- If ISINs + amounts are detected, returns a portfolio risk evaluation.
-- Else, answers via RAG with retrieved sources.
-
-All helper modules live under `chatbot/modules/`.
-"""
+# chatbot/main.py
 from __future__ import annotations
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from modules.router import parse_portfolio
 from modules.portfolio_tool import evaluate_portfolio
 from modules.rag import answer_with_rag
+from modules.normalizer import normalize_response
+from models.standard_response import StandardResponse
 import os
 from dotenv import load_dotenv
 
+# Load environment variables from .env file
 load_dotenv()
 
-app = FastAPI(title="ETF Chatbot (Local, CPU-only)")
-
+# Initialize FastAPI application
+app = FastAPI(title="ETF Open Analytics Chatbot")
 
 class ChatRequest(BaseModel):
+    """Schema for incoming chat requests."""
     message: str
 
+@app.get("/health")
+def health():
+    """Simple health-check endpoint."""
+    return {"status": "ok"}
 
-@app.post("/chat")
+@app.post("/chat", response_model=StandardResponse)
 def chat(req: ChatRequest):
-    """Single endpoint for both general chat (RAG) and portfolio risk evaluation."""
+    """
+    Main chat endpoint.
+    Depending on the content of the user message:
+      - If an ETF portfolio is detected, the request is routed to the model evaluator.
+      - Otherwise, it falls back to the RAG (retrieval-augmented generation) flow.
+    In all cases, the output is normalized into a consistent response format.
+    """
     text = req.message.strip()
 
-    # Specialized path: try to extract a portfolio from free text
+    # --- 1) Try to extract a portfolio → MODEL path
     portfolio = parse_portfolio(text)
     if portfolio:
         try:
             result = evaluate_portfolio(portfolio)
         except Exception as e:
-            # Surface deterministic errors (e.g., missing DB rows, feature mismatch)
+            # Preserve the error semantics but return a proper HTTP error
             raise HTTPException(status_code=400, detail=str(e))
-        return {"type": "portfolio_risk", "result": result}
 
-    # Fallback to RAG over the local knowledge base
+        # Normalize to a human-readable message
+        return normalize_response(
+            source="portfolio_evaluator",
+            payload={"result": result},
+            user_text=text,
+        )
+
+    # --- 2) Otherwise → RAG path
     answer, sources = answer_with_rag(text)
-    return {"type": "rag", "answer": answer, "sources": sources}
+
+    return normalize_response(
+        source="rag",
+        payload={"answer": answer, "sources": sources},
+        user_text=text,
+    )
